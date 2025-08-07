@@ -3,7 +3,14 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
+import Heading from "@tiptap/extension-heading";
 import StarterKit from "@tiptap/starter-kit";
+import Table from "@tiptap/extension-table";
+import TableHeader from "@tiptap/extension-table-header";
+import TableCell from "@tiptap/extension-table-cell";
+import TableRow from "@tiptap/extension-table-row";
+import Image from "@tiptap/extension-image";
+import ImageResize from "tiptap-extension-resize-image";
 
 export const Editor = () => {
   const editor = useEditor({
@@ -16,12 +23,36 @@ export const Editor = () => {
     },
     extensions: [
       StarterKit,
+      Table,
+      TableHeader,
+      TableCell,
+      TableRow,
+      Image,
+      ImageResize,
       TaskItem.configure({
         nested: true,
       }),
       TaskList,
+      Heading.configure({
+        levels: [1, 2, 3, 4, 5, 6],
+      }),
     ],
-    content: "<p>Hello World! 🌍</p>",
+    content: `
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+            </tr>
+            <tr>
+              <td>Cyndi Lauper</td>
+              <td>Singer</td>
+              <td>Songwriter</td>
+              <td>Actress</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
   });
 
   return (
