@@ -88,6 +88,25 @@ body {
 }
 
 .tiptap {
+  /* Code and preformatted text styles */
+  code {
+    background-color: var(--purple-light);
+    border-radius: 0.4rem;
+    color: var(--black);
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  /* Link styles */
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
   img {
     display: block;
     height: auto;
@@ -165,7 +184,7 @@ body {
 
     .selectedCell:after {
       background: #959595;
-      content: '';
+      content: "";
       left: 0;
       right: 0;
       top: 0;
@@ -221,7 +240,7 @@ body {
   }
 
   /* Task list specific styles */
-  ul[data-type='taskList'] {
+  ul[data-type="taskList"] {
     list-style: none;
     margin-left: 0;
     padding: 0;
@@ -241,11 +260,11 @@ body {
       }
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"] {
       cursor: pointer;
     }
 
-    ul[data-type='taskList'] {
+    ul[data-type="taskList"] {
       margin: 0;
     }
   }
