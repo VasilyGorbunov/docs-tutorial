@@ -11,7 +11,6 @@ import {
   BoldIcon,
   ChevronDownIcon,
   HighlighterIcon,
-  Icon,
   ImageIcon,
   ItalicIcon,
   Link2Icon,
