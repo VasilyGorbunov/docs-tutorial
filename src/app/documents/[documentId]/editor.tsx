@@ -19,6 +19,7 @@ import Highlight from "@tiptap/extension-highlight";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import { FontSizeExtension } from "@/app/extensions/font-size";
+import { LineHeightExtension } from "@/app/extensions/line-height";
 
 import { useEditorStore } from "@/store/use-editor-store";
 
@@ -88,23 +89,27 @@ export const Editor = () => {
         types: ["heading", "paragraph"],
       }),
       FontSizeExtension,
+      LineHeightExtension.configure({
+        types: ["heading", "paragraph"],
+        defaultLineHeight: "normal",
+      }),
     ],
-    content: `
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-      `,
+    // content: `
+    //     <table>
+    //       <tbody>
+    //         <tr>
+    //           <th>Name</th>
+    //           <th colspan="3">Description</th>
+    //         </tr>
+    //         <tr>
+    //           <td>Cyndi Lauper</td>
+    //           <td>Singer</td>
+    //           <td>Songwriter</td>
+    //           <td>Actress</td>
+    //         </tr>
+    //       </tbody>
+    //     </table>
+    //   `,
   });
 
   return (

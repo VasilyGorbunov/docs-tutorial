@@ -15,6 +15,7 @@ import {
   ImageIcon,
   ItalicIcon,
   Link2Icon,
+  ListCollapseIcon,
   ListIcon,
   ListOrderedIcon,
   ListTodoIcon,
@@ -51,13 +52,49 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
-import TextAlign from "@tiptap/extension-text-align";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
   isActive?: boolean;
   icon: LucideIcon;
 }
+
+const LineHeightButton = () => {
+  const { editor } = useEditorStore();
+
+  const lineHeights = [
+    { label: "Default", value: "normal" },
+    { label: "Single", value: "1" },
+    { label: "1.15", value: "1.15" },
+    { label: "1.5", value: "1.5" },
+    { label: "Double", value: "2" },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+          <ListCollapseIcon className="size-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {lineHeights.map(({ label, value }) => (
+          <button
+            key={value}
+            onClick={() => editor?.chain().focus().setLineHeight(value).run()}
+            className={cn(
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-100/80",
+              editor?.getAttributes("paragraph").lineHeight === value &&
+                "bg-neutral-200/80"
+            )}
+          >
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const FontSizeButton = () => {
   const { editor } = useEditorStore();
@@ -277,7 +314,10 @@ const ImageButton = () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <Dialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Insert Image URL</DialogTitle>
@@ -352,7 +392,10 @@ const HighlightColorButton = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0">
-        <SketchPicker color={value} onChange={onChange} />
+        <SketchPicker
+          color={value}
+          onChange={onChange}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -379,7 +422,10 @@ const TextColorButton = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0">
-        <SketchPicker color={value} onChange={onChange} />
+        <SketchPicker
+          color={value}
+          onChange={onChange}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -587,27 +633,52 @@ export const Toolbar = () => {
   return (
     <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
       {sections[0].map((item) => (
-        <ToolbarButton key={item.label} {...item} />
+        <ToolbarButton
+          key={item.label}
+          {...item}
+        />
       ))}
-      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <Separator
+        orientation="vertical"
+        className="h-6 bg-neutral-300"
+      />
       <FontFamilyButton />
-      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <Separator
+        orientation="vertical"
+        className="h-6 bg-neutral-300"
+      />
       <HeadingLevelButton />
-      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <Separator
+        orientation="vertical"
+        className="h-6 bg-neutral-300"
+      />
       <FontSizeButton />
-      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <Separator
+        orientation="vertical"
+        className="h-6 bg-neutral-300"
+      />
       {sections[1].map((item) => (
-        <ToolbarButton key={item.label} {...item} />
+        <ToolbarButton
+          key={item.label}
+          {...item}
+        />
       ))}
       <TextColorButton />
       <HighlightColorButton />
-      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      <Separator
+        orientation="vertical"
+        className="h-6 bg-neutral-300"
+      />
       <LinkButton />
       <ImageButton />
       <AlignButton />
+      <LineHeightButton />
       <ListButton />
       {sections[2].map((item) => (
-        <ToolbarButton key={item.label} {...item} />
+        <ToolbarButton
+          key={item.label}
+          {...item}
+        />
       ))}
     </div>
   );
